@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Container,
   Flex,
   HStack,
@@ -7,12 +8,15 @@ import {
   Spacer,
   Text,
 } from "@chakra-ui/react";
+import LanguageIcon from "@mui/icons-material/Language";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
 import logo from "../../assets/quran.png";
-import { Search2Icon, SearchIcon } from "@chakra-ui/icons";
+import { SearchIcon } from "@chakra-ui/icons";
 function Quran() {
+  const [search, setSearch] = useState("");
+  console.log(search);
   const [surahs, setSurahs] = useState([]);
   // const { t, i18n } = useTranslation();
   // const changeLanguage = (language) => {
@@ -80,9 +84,9 @@ function Quran() {
       <Flex wrap="wrap" justify="space-between" gap="20px">
         {surahs
           .filter((item) => {
-            return search.toLowerCase() === ""
+            return search.toLowerCase() === " "
               ? item
-              : item.first_name.toLowerCase().includes(search);
+              : item.englishName.toLowerCase().includes(search);
           })
           .map((sura, index) => {
             return (

@@ -6,8 +6,8 @@ import Quran from '../quran/Quran'
 function Home() {
   return (
     <div>
-        <Header/>
-        <Showcase/>
+        {/* <Header/> */}
+        {/* <Showcase/> */}
         <Quran />
     </div>
   )
