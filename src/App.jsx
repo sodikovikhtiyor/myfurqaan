@@ -1,14 +1,14 @@
-
-import { ChakraProvider } from "@chakra-ui/react";
 import "./App.css";
-
+import { Route, Routes } from "react-router-dom";
+import Home from "./components/home/Home";
+import Surah from "./components/surah/Surah";
 function App() {
-
   return (
     <>
-      <ChakraProvider>
-        
-      </ChakraProvider>
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="surah/:surahId" element={<Surah />}></Route>
+      </Routes>
     </>
   );
 }
