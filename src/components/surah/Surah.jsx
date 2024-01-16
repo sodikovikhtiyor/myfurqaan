@@ -1,24 +1,34 @@
 import { Box, Container, Flex, Heading, Text } from "@chakra-ui/react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Header from "../header/Header";
+import Audio from "../audio/Audio";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import Context from "../Context";
+import { UserContext } from "./components/Context.jsx";
 
-function Surah() {
+function Surah({ lang }) {
   const [ayahs, setAyahs] = useState([]);
+  const [ayahNum, setAyahNum] = useState("");
   const [surala, setSurala] = useState([]);
-  const [audio, setAudio] = useState([]);
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const { state, setState } = useContext(Context);
   const { surahId } = useParams();
   useEffect(() => {
     axios
       .get(`http://api.alquran.cloud/v1/surah/${surahId}/ar.alafasy`)
       .then((res) => {
-        console.log(res.data.data.ayahs);
         setSurala(res.data.data);
         setAyahs(res.data.data.ayahs);
       })
       .catch((err) => console.error(err));
-  }, []);
+  }, [surahId]);
+  const handleClick = (value) => {
+    setState(value.ayah.audio);
+    console.log(state);
+    setIsButtonClicked(true);
+  };
   return (
     <Container maxW="1200px">
       {[surala].map((sura, index) => {
@@ -33,12 +43,19 @@ function Surah() {
               return (
                 <Box key={index}>
                   <Box gap="10px" mb="2rem">
-                    <Flex gap="10px" mb='2rem'>
+                    <Flex
+                      gap="10px"
+                      mb="2rem"
+                      onClick={() => handleClick({ ayah })}
+                    >
                       <Heading fontSize="1.6rem" color="green">
                         {sura.number}:{ayah.numberInSurah}
                       </Heading>
-                      <Heading color="black" fontSize="1.6rem">
+                      <Heading color="black" fontSize="1.6rem" cursor="pointer">
                         {ayah.text}
+
+                        <PlayArrowIcon />
+
                         {ayah.sajda?.obligatory && (
                           <Text
                             textDecoration="underline"
@@ -51,11 +68,6 @@ function Surah() {
                         )}
                       </Heading>
                     </Flex>
-                    <Box>
-                      <audio controls autoplay>
-                        <source src={ayah.audio} type="audio/ogg" />
-                      </audio>
-                    </Box>
                   </Box>
                 </Box>
               );
@@ -63,6 +75,12 @@ function Surah() {
           </Box>
         );
       })}
+      {/* {console.log(ayahNum)} */}
+      {isButtonClicked && (
+        <UserContext.Provider value={{state}}>
+          <App />
+        </UserContext.Provider>
+      )}
     </Container>
   );
 }

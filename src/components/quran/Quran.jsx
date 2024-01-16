@@ -14,25 +14,18 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 import logo from "../../assets/quran.png";
 import { SearchIcon } from "@chakra-ui/icons";
+
 function Quran() {
   const [search, setSearch] = useState("");
-  console.log(search);
   const [surahs, setSurahs] = useState([]);
-  // const { t, i18n } = useTranslation();
-  // const changeLanguage = (language) => {
-  //   i18n.changeLanguage(language);
-  // }
+
   useEffect(() => {
     axios
       .get("https://api.alquran.cloud/v1/surah")
       .then((res) => setSurahs(res.data.data))
       .catch((err) => console.error(err));
   }, []);
-  const inputStyle = {
-    ":focus": {
-      outline: "none",
-    },
-  };
+  
   return (
     <Container maxW="1200px" color="black" py="2rem">
       <Flex alignItems="center" wrap="wrap" p="10px">
@@ -57,10 +50,10 @@ function Quran() {
               type="search"
               bg="white"
               p="5px"
-              _focus="none"
               w="250px"
               borderRadius="20px"
-              sx={inputStyle}
+              // sx={inputStyle}
+              _focus={{ outline: "none" }}
               onChange={(e) => setSearch(e.target.value)}
             />
 
@@ -77,9 +70,6 @@ function Quran() {
       </Flex>
       <Heading textAlign="center" my="2rem">
         All surahs
-        {/* <button onClick={() => changeLanguage('en')}>EN</button>
-        <button onClick={() => changeLanguage('ar')}>AR</button>
-        <div>{t("text")}</div> */}
       </Heading>
       <Flex wrap="wrap" justify="space-between" gap="20px">
         {surahs
@@ -111,6 +101,7 @@ function Quran() {
                       <Heading color="black" fontSize="1.6rem">
                         {sura.name}
                       </Heading>
+                      <Text fontWeight='bold'>{sura.englishName}</Text>
                       <Text>{sura.englishNameTranslation}</Text>
                     </Box>
                   </Flex>
