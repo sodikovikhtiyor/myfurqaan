@@ -19,7 +19,7 @@ function Header() {
   const [lang, setLang] = useState("ar.alafasy");
   const navigate = useNavigate();
   return (
-    <Container py="30px" as="section" maxW="6xl">
+    <Container py="30px" as="section" maxW="1200px" px='0'>
       <Flex alignItems="center" wrap="wrap" p="10px">
         <Flex
           className="logo"
@@ -55,13 +55,13 @@ function Header() {
 
             <SearchIcon />
           </Flex>
-          <LanguageIcon cursor="pointer" onClick={() => setLangs(true)} />
+          {/* <LanguageIcon cursor="pointer" onClick={() => setLangs(true)} />
           {langs && (
             <>
               <Link to="/en">En</Link>
               <Link to=":surahId">Ar</Link>
             </>
-          )}
+          )} */}
           {/* <select value={lang} onChange={(e) => setLang(e.target.value)}>
             <option value="en.asad">English</option>
             <option value="ar.alafasy">Arabic</option>

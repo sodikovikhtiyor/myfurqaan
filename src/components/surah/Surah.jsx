@@ -41,7 +41,7 @@ function Surah() {
   };
 
   return (
-    <Container maxW="1200px">
+    <Container maxW="1200px" p='0'>
       {[surala].map((sura, index) => {
         return (
           <Box key={index}>

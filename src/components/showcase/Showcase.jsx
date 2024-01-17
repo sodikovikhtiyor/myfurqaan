@@ -1,6 +1,7 @@
 import { Box, Container, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import mosque from "../../assets/mosque.jpeg";
+import Home from "../home/Home";
 function Showcase() {
   return (
     <Container py="30px" as="section" maxW="6xl">
@@ -15,6 +16,7 @@ function Showcase() {
             et quaerat dolores rem rerum, iste eius corporis fugit ut,
             exercitationem ratione doloremque?
           </Text>
+          <Home/>
         </Box>
         <Image
           src={mosque}
