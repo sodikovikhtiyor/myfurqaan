@@ -1,9 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import React, { useContext } from "react";
-import Context from "../Context";
 function Audio({number}) {
   // const { state, setState } = useContext(Context);
-  console.log(number);
   return (
     <Box
       position="fixed"

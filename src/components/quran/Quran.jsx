@@ -80,7 +80,7 @@ function Quran({search}) {
           // })
           .map((sura, index) => {
             return (
-              <NavLink to={"/" + sura.number} key={index}>
+              <NavLink to={"/" + sura.number } key={index}>
                 <Box
                   border="1px solid black"
                   borderRadius="10px"
@@ -101,7 +101,7 @@ function Quran({search}) {
                       <Heading color="black" fontSize="1.6rem">
                         {sura.name}
                       </Heading>
-                      <Text fontWeight='bold'>{sura.englishName}</Text>
+                      <Text fontWeight='bold' color="green">{sura.englishName}</Text>
                       <Text>{sura.englishNameTranslation}</Text>
                     </Box>
                   </Flex>
