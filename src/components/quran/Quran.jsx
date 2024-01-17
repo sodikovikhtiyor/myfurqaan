@@ -15,8 +15,8 @@ import { NavLink } from "react-router-dom";
 import logo from "../../assets/quran.png";
 import { SearchIcon } from "@chakra-ui/icons";
 
-function Quran() {
-  const [search, setSearch] = useState("");
+function Quran({search}) {
+  // const [search, setSearch] = useState("");
   const [surahs, setSurahs] = useState([]);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ function Quran() {
   
   return (
     <Container maxW="1200px" color="black" py="2rem">
-      <Flex alignItems="center" wrap="wrap" p="10px">
+      {/* <Flex alignItems="center" wrap="wrap" p="10px">
         <Flex className="logo" alignItems="center">
           <img src={logo} width="60px" />
           <Heading color="green">My Furqaan</Heading>
@@ -60,27 +60,27 @@ function Quran() {
             <SearchIcon />
           </Flex>
           <LanguageIcon cursor="pointer" />
-          <select className="">
+          <select >
             <option value="en">Ensglish</option>
             <option value="ar">Arabic</option>
           </select>
 
           <Button colorScheme="green">Login</Button>
         </HStack>
-      </Flex>
+      </Flex> */}
       <Heading textAlign="center" my="2rem">
         All surahs
       </Heading>
       <Flex wrap="wrap" justify="space-between" gap="20px">
         {surahs
-          .filter((item) => {
-            return search.toLowerCase() === " "
-              ? item
-              : item.englishName.toLowerCase().includes(search);
-          })
+          // .filter((item) => {
+          //   return search.toLowerCase() === " "
+          //     ? item
+          //     : item.englishName.toLowerCase().includes(search);
+          // })
           .map((sura, index) => {
             return (
-              <NavLink to={"surah/" + sura.number} key={index}>
+              <NavLink to={"/" + sura.number} key={index}>
                 <Box
                   border="1px solid black"
                   borderRadius="10px"

@@ -1,8 +1,9 @@
 import { Box } from "@chakra-ui/react";
 import React, { useContext } from "react";
 import Context from "../Context";
-function Audio() {
-  const { state, setState } = useContext(Context);
+function Audio({number}) {
+  // const { state, setState } = useContext(Context);
+  console.log(number);
   return (
     <Box
       position="fixed"
@@ -18,9 +19,10 @@ function Audio() {
     >
       <audio controls autoPlay>
         <source
-          src={`https://cdn.islamic.network/quran/audio/128/ar.alafasy/${state}.mp3`}
+          src={`https://cdn.islamic.network/quran/audio/128/ar.alafasy/${number}.mp3`}
           type="audio/mpeg"
         />
+        {console.log(number)}
       </audio>
     </Box>
   );

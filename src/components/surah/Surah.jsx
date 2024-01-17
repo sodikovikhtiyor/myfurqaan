@@ -5,19 +5,28 @@ import { useParams } from "react-router-dom";
 import Header from "../header/Header";
 import Audio from "../audio/Audio";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import Context from "../Context";
-import { UserContext } from "./components/Context.jsx";
+// import Context from "../Context";
+// import { UserContext } from "./components/Context.jsx";
 
-function Surah({ lang }) {
+function Surah() {
   const [ayahs, setAyahs] = useState([]);
   const [ayahNum, setAyahNum] = useState("");
   const [surala, setSurala] = useState([]);
+  const [lang, setLang] = useState("");
+
   const [isButtonClicked, setIsButtonClicked] = useState(false);
-  const { state, setState } = useContext(Context);
+  // const { state, setState } = useContext(Context);
   const { surahId } = useParams();
+  const toEn = () => {
+    setLang("en.asad");
+  };
+  const toAr = () => {
+    setLang("ar.alafasy");
+  };
   useEffect(() => {
+    console.log(lang);
     axios
-      .get(`http://api.alquran.cloud/v1/surah/${surahId}/ar.alafasy`)
+      .get(`http://api.alquran.cloud/v1/surah/${surahId}/${lang}`)
       .then((res) => {
         setSurala(res.data.data);
         setAyahs(res.data.data.ayahs);
@@ -25,20 +34,27 @@ function Surah({ lang }) {
       .catch((err) => console.error(err));
   }, [surahId]);
   const handleClick = (value) => {
-    setState(value.ayah.audio);
-    console.log(state);
+    console.log(value);
+    setAyahNum(value.number);
     setIsButtonClicked(true);
+    // setIsButtonClicked(false);
   };
+
   return (
     <Container maxW="1200px">
       {[surala].map((sura, index) => {
         return (
           <Box key={index}>
-            <Header />
             <Box mb="3rem">
-              <Heading>{sura.englishName}</Heading>
+              <Heading>
+                {sura.englishName}
+                <button onClick={toEn}>En</button>
+                <button onClick={toAr}>Ar</button>
+              </Heading>
+              <Text fontWeight="bold">{sura.name}</Text>
               <Text>{sura.englishNameTranslation}</Text>
             </Box>
+            {isButtonClicked ? <Audio number={ayahNum} /> : !isButtonClicked}
             {ayahs.map((ayah, index) => {
               return (
                 <Box key={index}>
@@ -46,7 +62,7 @@ function Surah({ lang }) {
                     <Flex
                       gap="10px"
                       mb="2rem"
-                      onClick={() => handleClick({ ayah })}
+                      onClick={() => handleClick(ayah)}
                     >
                       <Heading fontSize="1.6rem" color="green">
                         {sura.number}:{ayah.numberInSurah}
@@ -75,12 +91,13 @@ function Surah({ lang }) {
           </Box>
         );
       })}
+
       {/* {console.log(ayahNum)} */}
-      {isButtonClicked && (
+      {/* {isButtonClicked && (
         <UserContext.Provider value={{state}}>
           <App />
         </UserContext.Provider>
-      )}
+      )} */}
     </Container>
   );
 }

@@ -1,16 +1,17 @@
-import React from 'react'
-import Header from '../header/Header'
-import Showcase from '../showcase/Showcase'
-import Quran from '../quran/Quran'
+import React from "react";
+import { Link, NavLink, Outlet } from "react-router-dom";
 
 function Home() {
   return (
     <div>
-        {/* <Header/> */}
-        {/* <Showcase/> */}
-        <Quran />
+      {/* <Header/> */}
+      {/* <Showcase/> */}
+      <Link to="/surah">
+        Go to Quran
+      </Link>
+      <Outlet />
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;
