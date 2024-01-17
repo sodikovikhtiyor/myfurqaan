@@ -5,12 +5,14 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
 
-import "./components/i18n.jsx";
+// import { UserContext } from "./components/Context.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <ChakraProvider>
     <BrowserRouter>
       <Suspense fallback={<div>Loading...</div>}>
-        <App />
+        {/* <UserContext.Consumer> */}
+          <App />
+        {/* </UserContext.Consumer> */}
       </Suspense>
     </BrowserRouter>
   </ChakraProvider>
