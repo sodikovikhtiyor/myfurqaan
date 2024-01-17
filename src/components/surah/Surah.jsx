@@ -1,4 +1,4 @@
-import { Box, Container, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Button, Container, Flex, Heading, Text } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -12,7 +12,7 @@ function Surah() {
   const [ayahs, setAyahs] = useState([]);
   const [ayahNum, setAyahNum] = useState("");
   const [surala, setSurala] = useState([]);
-  const [lang, setLang] = useState("");
+  const [lang, setLang] = useState("ar.alafasy");
 
   const [isButtonClicked, setIsButtonClicked] = useState(false);
   // const { state, setState } = useContext(Context);
@@ -32,7 +32,7 @@ function Surah() {
         setAyahs(res.data.data.ayahs);
       })
       .catch((err) => console.error(err));
-  }, [surahId]);
+  }, [surahId, lang]);
   const handleClick = (value) => {
     console.log(value);
     setAyahNum(value.number);
@@ -46,10 +46,12 @@ function Surah() {
         return (
           <Box key={index}>
             <Box mb="3rem">
-              <Heading>
+              <Heading display={"flex"} justifyContent="space-between">
                 {sura.englishName}
-                <button onClick={toEn}>En</button>
-                <button onClick={toAr}>Ar</button>
+                <Box >
+                  <Button mr='10px' onClick={toEn}>En</Button>
+                  <Button onClick={toAr}>Ar</Button>
+                </Box>
               </Heading>
               <Text fontWeight="bold">{sura.name}</Text>
               <Text>{sura.englishNameTranslation}</Text>

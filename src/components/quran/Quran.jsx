@@ -80,7 +80,7 @@ function Quran({search}) {
           // })
           .map((sura, index) => {
             return (
-              <NavLink to={"/" + sura.number} key={index}>
+              <NavLink to={"/" + sura.number } key={index}>
                 <Box
                   border="1px solid black"
                   borderRadius="10px"
